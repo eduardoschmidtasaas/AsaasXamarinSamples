@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="2dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginLeft="8dp">
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="88.0dp">
+            <ImageView
+                android:id="@+id/icon_doc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="21.0dp"
+                android:layout_marginTop="24.0dp" />
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_toRightOf="@+id/icon_doc"
+                android:layout_marginLeft="16.0dp"
+                android:layout_marginTop="24.0dp"
+                android:textSize="16.0sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Dados comerciais"
+                android:textColor="#de000000" />
+            <TextView
+                android:id="@+id/txtSubject"
+                android:layout_toRightOf="@id/icon_doc"
+                android:layout_below="@+id/txtName"
+                android:layout_marginLeft="16.0dp"
+                android:textSize="12.0sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Informações da minha empresa"
+                android:textColor="#de000000" />
+            <ImageView
+                android:id="@+id/parent_list_item_expand_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8.0dp"
+                android:src="@drawable/k_arrow_down" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/viewx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8.0dp"
+            android:layout_marginRight="8.0dp"
+            android:paddingBottom="16.0dp"
+            android:visibility="gone">
+            <TextView
+                android:id="@+id/requisitsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16.0dp"
+                android:textSize="14.0sp"
+                android:textColor="#de000000"
+                android:text="" />
+            <Button
+                android:id="@+id/btnSend"
+                android:layout_width="88.0dp"
+                android:layout_height="36.0dp"
+                android:layout_marginTop="24.0dp"
+                android:layout_marginLeft="16.0dp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/custom_btn_blue"
+                android:gravity="center"
+                android:text="Enviar"
+                android:layout_below="@id/requisitsText" />
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

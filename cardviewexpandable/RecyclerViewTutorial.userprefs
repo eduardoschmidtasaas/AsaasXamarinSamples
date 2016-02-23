@@ -1,0 +1,21 @@
+﻿<Properties StartupItem="RecyclerViewTutorial\RecyclerViewTutorial.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.0276c60d96d1c475" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="RecyclerViewTutorial\Resources\drawable-v21\custom_btn_blue.xml">
+    <Files>
+      <File FileName="RecyclerViewTutorial\Data.cs" Line="14" Column="2" />
+      <File FileName="RecyclerViewTutorial\MainActivity.cs" Line="65" Column="3" />
+      <File FileName="RecyclerViewTutorial\Resources\CustomRecyclerAdapter.cs" Line="124" Column="4" />
+      <File FileName="RecyclerViewTutorial\Resources\drawable-v21\custom_btn_blue.xml" Line="2" Column="1" />
+      <File FileName="RecyclerViewTutorial\Resources\drawable\custom_btn_blue.xml" Line="37" Column="60" />
+      <File FileName="RecyclerViewTutorial\Resources\drawable-hdpi\btn_default_mtrl_shape_blue.xml" Line="4" Column="33" />
+      <File FileName="RecyclerViewTutorial\Resources\values\colors.xml" Line="5" Column="17" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint enabled="false" file="C:\Users\Matheus_2\Desktop\Xamarin25Done\RecyclerViewTutorial\Resources\CustomRecyclerAdapter.cs" line="147" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.RecyclerViewTutorial AndroidDesignerPreferredDevice="Nexus 4" />
+</Properties>

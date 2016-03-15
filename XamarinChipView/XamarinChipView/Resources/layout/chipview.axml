@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+    <RelativeLayout
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/chip_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="4dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:paddingTop="4dp"
+            android:background="@drawable/custom_chip_background">
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="false"
+                android:textColor="@color/white" />
+        </LinearLayout>
+        <EditText
+            android:id="@+id/editTextNewEmail"
+            android:layout_toRightOf="@id/chip_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="26.0dp"
+            android:gravity="center_vertical"
+            android:textSize="14.0dp"
+            android:textColor="@android:color/white"
+            android:paddingBottom="1.0dp"
+            android:singleLine="true"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/edittextstyle"
+            android:minWidth="100dp" />
+    </RelativeLayout>
+</RelativeLayout>

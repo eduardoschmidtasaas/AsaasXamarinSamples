@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="chip_background">#BDBDBD</color>
+    <color name="chip_background_selected">#9E9E9E</color>
+    <color name="holo_green_dark_focused">#de82b346</color>
+  	<color name="holo_green_dark_normal">#64A81A</color>
+    <color name="white">#ffffff</color>
+ 	<color name="additionalEmail_color_focused">#0172C6</color>
+  	<color name="additionalEmail_color">#de0172C6</color>
+</resources>

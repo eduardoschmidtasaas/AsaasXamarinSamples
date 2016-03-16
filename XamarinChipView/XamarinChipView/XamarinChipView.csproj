@@ -61,7 +61,6 @@
     <Compile Include="ChipViewAdapter.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="OnChipClickListener.cs" />
-    <Compile Include="DeleteListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

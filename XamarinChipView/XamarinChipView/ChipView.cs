@@ -6,28 +6,29 @@ using Observer = Java.Util.IObserver;
 using System;
 using Java.Util;
 using Android.Widget;
-using XamarinChipView;
 using IEditable = Android.Text.IEditable;
 using Android.Text;
 using Android.Views.InputMethods;
+using Android.Graphics;
+using XamarinChipView;
 
 namespace ChipViewXamarin {
-	public class ChipView : ViewGroup , Observer {
-	    private ChipViewAdapter mAdapter;
-	    private OnChipClickListener mListener;
+	public class ChipView : ViewGroup , Observer, Android.Views.View.IOnClickListener {
+		private ChipViewAdapter mAdapter;
+		private OnChipClickListener mListener;
 
-	    // Data
+		// Data
 		private List<int> mLineHeightList;
 
 		public ChipView(Context context, AttributeSet attrs):base(context, attrs) {
-	        init(context, attrs);
-	    }
+			init(context, attrs);
+		}
 
-	    private void init(Context context, AttributeSet attrs) {
-	        mLineHeightList = new List<int>();
+		private void init(Context context, AttributeSet attrs) {
+			mLineHeightList = new List<int>();
 			ChipViewAdapter adapter =  new ChipViewAdapter(context, attrs);
 			SetAdapter(adapter);
-	    }
+		}
 
 		protected override void OnMeasure (int widthMeasureSpec, int heightMeasureSpec)
 		{
@@ -111,19 +112,16 @@ namespace ChipViewXamarin {
 					childView.Layout((childX + layoutParams.LeftMargin), (childY + layoutParams.TopMargin), (lineWidth - layoutParams.RightMargin), (childY + childHeight - layoutParams.BottomMargin));
 
 					if (mListener != null) {
-						childView.Click -= EventChipClick(chip);
-						childView.Click += EventChipClick(chip);
+						childView.SetOnClickListener (this);
 					}
 				}
 			}
 		}
-			
-		public EventHandler EventChipClick(Chip chip){
-			return new EventHandler(
-				delegate {
-					mListener.OnChipClick(chip);
-				}
-			);
+
+		public void OnClick(View view){
+			int position = IndexOfChild (view);
+			Chip chip = mAdapter.GetChipList()[position];
+			mListener.OnChipClick(chip);
 		}
 
 		public void Refresh() {
@@ -131,6 +129,7 @@ namespace ChipViewXamarin {
 				RemoveAllViews ();
 
 				for (int i = 0; i < Count() + 1; i++) {
+					Chip chip = mAdapter.GetChipList()[i];
 					View view = mAdapter.GetView(this, i);
 
 
@@ -145,21 +144,39 @@ namespace ChipViewXamarin {
 							EditText editText = view.FindViewById<EditText> (Resource.Id.editTextNewEmail);
 							editText.RequestFocus ();
 
-							DeleteListener deleteListener = new DeleteListener (Android.Text.Method.TextKeyListener.Capitalize.None, true);
+							editText.AfterTextChanged += (object sender, AfterTextChangedEventArgs e) => {
+								if (editText.Text.Length == 0){
+									if (Count() > 0){
+										Remove (GetChipAt (Count () - 1));
+										GetLastChip ().SetEditText ("");
+										Refresh ();
+									}
+								}
+							};
 
-							deleteListener.eventHandler -= EditTextEventHandler (editText);
-							deleteListener.eventHandler += EditTextEventHandler (editText);
-	
-							editText.KeyListener = deleteListener;
+							editText.TextChanged += (object sender, TextChangedEventArgs e) => {
+								editText.Background.ClearColorFilter();
+							};
 
 							editText.EditorAction += (object sender, TextView.EditorActionEventArgs e) => {
 								if (e.ActionId == ImeAction.Done){
-									GetLastChip().SetEmail(editText.Text);
-									GetLastChip().SetName("NoName");
-									Add(new Chip("@NULL","@NULL"));
+									string email = chip.GetEditText().Remove(0, 1);
+//									if (!String.IsNullOrEmpty(email) && !objVerifyFields.VerifyEmailField (email).Item1) { //Your email verification if you want.
+//										Toast.MakeText (Context, "O email " + email + "  é inválido.", ToastLength.Long).Show ();
+//										editText.Background.SetColorFilter(Color.Red, PorterDuff.Mode.SrcIn);
+//									}else{
+										if (!Exists(email)){
+											GetLastChip().SetEmail(email);
+											GetLastChip().SetName("NoName");
+											Add(new Chip("ISNULL","ISNULL"));
+										}else{
+											Toast.MakeText (Context, "O email " + email + " já está adicionado.", ToastLength.Long).Show ();
+											editText.Background.SetColorFilter(Color.Red, PorterDuff.Mode.SrcIn);
+										}
+//									}
 								}
 							};
-								
+
 						}
 						AddView(view);
 					}
@@ -169,16 +186,11 @@ namespace ChipViewXamarin {
 			}
 		}
 
-		public EventHandler EditTextEventHandler(EditText editText){
-			return new EventHandler (delegate {
-				if (editText.Text.Length == 0) {
-					if (Count() > 0){
-						Remove (GetChipAt (Count () - 1));
-						GetLastChip ().SetEditText ("");
-						Refresh ();
-					}
-				}
-			});
+		public bool ChipEmailIsEmpty(string email){
+			if (email == " ") {
+				return true;
+			}
+			return false;
 		}
 
 		public void Add(Chip chip) {
@@ -189,6 +201,10 @@ namespace ChipViewXamarin {
 			mAdapter.Remove (chip);
 		}
 
+		public bool Exists(string email){
+			return mAdapter.Exists (email);
+		}
+
 		public int Count() {
 			return mAdapter.Count();
 		}
@@ -196,7 +212,7 @@ namespace ChipViewXamarin {
 		public List<Chip> GetChipList() {
 			return mAdapter.GetChipList ();
 		}
-		
+
 		public Chip GetChipAt(int position){
 			return mAdapter.GetChipAt (position);					
 		}
@@ -219,7 +235,7 @@ namespace ChipViewXamarin {
 			mAdapter.AddObserver(this);
 			Refresh();
 		}
-	
+
 		public void SetChipBackgroundResource(int backgroundRes) {
 			mAdapter.SetChipBackgroundResource(backgroundRes);
 		}

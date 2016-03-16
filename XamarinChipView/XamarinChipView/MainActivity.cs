@@ -7,6 +7,7 @@ using System;
 using XamarinChipView;
 using Android.Content.PM;
 using Android.Views;
+using Android.Widget;
 
 namespace ChipViewXamarin {
 
@@ -38,28 +39,28 @@ namespace ChipViewXamarin {
 		}
 
 		public void OnChipClick(Chip chip) {
-			if (chip.GetName () != "@NULL") {
+			if (chip.GetName () != "ISNULL") {
 				string email = chip.GetEmail ();
 				string editEmail = chip.GetEditText ();
 				Chip lastChip = mChipLayout.GetLastChip ();
 				string lastEditEmail = lastChip.GetEditText ();
-				if (chip == lastChip && lastEditEmail == "") {
-					mChipLayout.Remove (chip);
-					lastChip = mChipLayout.GetLastChip ();
-					lastChip.SetEditText (email);
-				} else if (chip == lastChip) {
-					lastChip = mChipLayout.GetLastChip ();
-					lastChip.SetEditText (email);
-					lastChip.SetEmail (lastEditEmail);
-				} else if (lastEditEmail == "") {
+				if (mChipLayout.ChipEmailIsEmpty(lastEditEmail)) {
 					mChipLayout.Remove (chip);
 					lastChip.SetEditText (email);
-				} else if (lastEditEmail != "") {
-					var lastEditText = lastChip.GetEditText ();
-					lastChip.SetEditText (email);
-					chip.SetEmail (lastEditText);
-				}
+				} else {
+					lastEditEmail = lastEditEmail.Remove (0, 1);
+//					if (objVerifyFields.VerifyEmailField (lastEditEmail).Item1) { //Your email verification if you want.
+						lastChip.SetEmail (lastEditEmail);
+						lastChip.SetName ("NoName");
 
+						Chip newChip = new Chip ("ISNULL", "ISNULL");
+						newChip.SetEditText (chip.GetEmail ());
+						mChipLayout.Add (newChip);
+						mChipLayout.Remove (chip);
+//					}else{
+//						Toast.MakeText (this, "O email " + lastEditEmail + "  é inválido.", ToastLength.Long).Show ();							
+//					}
+				}
 				mChipLayout.Refresh ();
 			}
 		}

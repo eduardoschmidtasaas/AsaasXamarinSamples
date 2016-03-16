@@ -7,7 +7,7 @@ namespace ChipViewXamarin
 	{
 		private string mName;
 		private string mEmail;
-		private string mEditText = "";
+		private string mEditText = " ";
 
 		public Chip(string email,string name) {
 			mName = name;
@@ -35,7 +35,7 @@ namespace ChipViewXamarin
 		}
 
 		public void SetEditText(string editText){
-			mEditText = editText;
+			mEditText = " " + editText;
 		}
 	}
 }

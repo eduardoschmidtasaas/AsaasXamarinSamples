@@ -3,8 +3,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center">
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/content"
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -23,21 +24,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="14.0sp" />
         </LinearLayout>
-        <EditText
-            android:id="@+id/editTextNewEmail"
-            android:layout_toRightOf="@id/chip_layout"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="wrap_content"
-            android:layout_height="26.0dp"
-            android:gravity="center_vertical"
-            android:textSize="14.0dp"
-            android:textColor="@android:color/white"
-            android:paddingLeft="0.0dp"
-            android:paddingBottom="1.0dp"
-            android:singleLine="true"
-            android:inputType="textEmailAddress"
-            android:background="@drawable/edittextstyle"
-            android:minWidth="100dp" />
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-18.0dp">
+            <EditText
+                android:id="@+id/editTextNewEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14.0dp"
+                android:textColor="@color/background_dark"
+                android:singleLine="true"
+                android:inputType="textEmailAddress"
+                android:minWidth="100dp" />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
 </RelativeLayout>
